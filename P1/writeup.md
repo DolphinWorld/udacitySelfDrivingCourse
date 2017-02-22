@@ -13,7 +13,7 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./examples/grayscale.jpg "Grayscale"
+[image1]: ./middle_steps/gray.png "Grayscale"
 [blurImage]: ./middle_steps/blur.png "Gaussian Blur"
 [edgeImage]: ./middle_steps/edges.png "Canny Edge"
 [regionEdgesImage]: ./middle_steps/region_edges.png "Region edges"
@@ -31,7 +31,7 @@ First, I converted the images to grayscale,
 
 ![gray image][image1]
 
-Then I call use Gaussian Blur to blur and smooth the image
+Secondary I use Gaussian Blur method to blur and smooth the image
 
 ![Blur Image][blurImage]
 
