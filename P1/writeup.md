@@ -15,7 +15,10 @@ The goals / steps of this project are the following:
 
 [image1]: ./examples/grayscale.jpg "Grayscale"
 [blurImage]: ./middle_steps/blur.png "Gaussian Blur"
-[edgeImage]: ./middle_steps/edge.png "Canny Edge"
+[edgeImage]: ./middle_steps/edges.png "Canny Edge"
+[regionEdgesImage]: ./middle_steps/regionEdges.png "Region edges"
+[HoughImage]: ./middle_steps/hough.png "Houge Image"
+[ResultImage]: ./middle_steps/result.png "Result Image"
 
 ---
 
@@ -35,6 +38,18 @@ Then I call use Gaussian Blur to smooth the image
 After that, I called canny to get the edge information
 
 ![Edge image][edgeImage]
+
+To filter out edges not related to the traffic line, I filter the edges image use a trapezoid.
+
+![Region Edge image][regionEdgesImage]
+
+With the final edges mask page, I called hough lines to calculate the traffic lines;
+
+![Hough image][HoughImage]
+
+At the end, use weighted_img function to combine the original image and the traffic line image, and generated the following result image. 
+
+![Result image][ResultImage]
 
 In order to draw a single line on the left and right lanes, I modified the draw_lines() function by ...
 
