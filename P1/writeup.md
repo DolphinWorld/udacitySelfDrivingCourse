@@ -15,6 +15,7 @@ The goals / steps of this project are the following:
 
 [image1]: ./examples/grayscale.jpg "Grayscale"
 [blurImage]: ./middle_steps/blur.png "Gaussian Blur"
+[edgeImage]: ./middle_steps/edge.png "Canny Edge"
 
 ---
 
@@ -24,10 +25,16 @@ The goals / steps of this project are the following:
 
 My pipeline consisted of 5 steps. 
 First, I converted the images to grayscale,
+
 ![gray image][image1]
 
 Then I call use Gaussian Blur to smooth the image
+
 ![Blur Image][blurImage]
+
+After that, I called canny to get the edge information
+
+![Edge image][edgeImage]
 
 In order to draw a single line on the left and right lanes, I modified the draw_lines() function by ...
 
