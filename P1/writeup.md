@@ -51,22 +51,18 @@ At the end, use weighted_img function to combine the original image and the traf
 
 ![Result image][ResultImage]
 
-In order to draw a single line on the left and right lanes, I modified the draw_lines() function by ...
-
-If you'd like to include images to show how the pipeline works, here is how to include an image: 
-
+In order to draw a single line on the left and right lanes, I modified the draw_lines() function by filter out lines whose slope abolute value too small, eg(-0.5 to 0.5), and calculate the average value of the x on the bottom, and x on the top on both side.
 
 
 ###2. Identify potential shortcomings with your current pipeline
 
 
-One potential shortcoming would be what would happen when ... 
+One potential shortcoming would be what would happen when there are white objects inside the region could confuse the line calculation.
 
-Another shortcoming could be ...
-
+Another shortcoming could be when there are shade or in the dark time, the algorithm may not work.
 
 ###3. Suggest possible improvements to your pipeline
 
-A possible improvement would be to ...
+A possible improvement would be to use relative color difference to detect edge, instead of absolute color difference.
 
-Another potential improvement could be to ...
+Another potential improvement could be predict the length of dash line and then match the prediction with the image.
