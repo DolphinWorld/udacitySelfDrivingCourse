@@ -14,8 +14,7 @@ The goals / steps of this project are the following:
 [//]: # (Image References)
 
 [image1]: ./examples/grayscale.jpg "Grayscale"
-[blur]: ./middle_steps/blur.jpg "Gaussian Blur""
-[blurImage]: ./middle_steps/blur.jpg "Gaussian Blur"
+[blurImage]: ./middle_steps/blur.png "Gaussian Blur"
 
 ---
 
