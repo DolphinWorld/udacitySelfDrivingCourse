@@ -15,6 +15,7 @@ The goals / steps of this project are the following:
 
 [image1]: ./examples/grayscale.jpg "Grayscale"
 [blur]: ./middle_steps/blur.jpg "Gaussian Blur""
+[blurImage]: ./middle_steps/blur.jpg "Gaussian Blur"
 
 ---
 
@@ -24,16 +25,15 @@ The goals / steps of this project are the following:
 
 My pipeline consisted of 5 steps. 
 First, I converted the images to grayscale,
-![alt text][image1]
+![gray image][image1]
 
 Then I call use Gaussian Blur to smooth the image
-![alt text][blur]
+![Blur Image][blurImage]
 
 In order to draw a single line on the left and right lanes, I modified the draw_lines() function by ...
 
 If you'd like to include images to show how the pipeline works, here is how to include an image: 
 
-![alt text][image1]
 
 
 ###2. Identify potential shortcomings with your current pipeline
