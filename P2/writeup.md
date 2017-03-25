@@ -36,17 +36,17 @@ You're reading it! and here is a link to my [project code](Traffic_Sign_Classifi
 
 ###Data Set Summary & Exploration
 
-####1. Provide a basic summary of the data set and identify where in your code the summary was done. In the code, the analysis should be done using python, numpy and/or pandas methods rather than hardcoding results manually.
+####1.  The following is the data summary. Analysis is done using python, numpy.
 
 The code for this step is contained in the second code cell of the IPython notebook.  
 
 I used the pandas library to calculate summary statistics of the traffic
 signs data set:
 
-* The size of training set is ?
-* The size of test set is ?
-* The shape of a traffic sign image is ?
-* The number of unique classes/labels in the data set is ?
+* The size of training set is ? 34799
+* The size of test set is ? 12630
+* The shape of a traffic sign image is ? (32, 32, 3)
+* The number of unique classes/labels in the data set is ? 43
 
 ####2. Include an exploratory visualization of the dataset and identify where the code is in your code file.
 
@@ -58,7 +58,7 @@ Here is an exploratory visualization of the data set. It is a bar chart showing 
 
 ###Design and Test a Model Architecture
 
-####1. Describe how, and identify where in your code, you preprocessed the image data. What tecniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc.
+####1. The pre-process of the data set is in the code block [4], I use the following code block to gray out the data set. Which is convert the image matrics from [32, 32, 3] to [32, 32, 1]. 
 
 The code for this step is contained in the fourth code cell of the IPython notebook.
 
