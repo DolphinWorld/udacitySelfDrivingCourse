@@ -15,7 +15,7 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: .visualize_cnn.png "histogram"
+[image1]: ./visualize_cnn.png "histogram"
 [image2]: ./examples/grayscale.jpg "Grayscaling"
 [image3]: ./examples/random_noise.jpg "Random Noise"
 [image4]: ./examples/placeholder.png "Traffic Sign 1"
@@ -54,7 +54,7 @@ The code for this step is contained in the third code cell of the IPython notebo
 
 Here is an exploratory visualization of the data set. It is a bar chart showing how the data is distributed across different traffic signs.
 
-![alt text][histogram]
+![alt text][image1]
 
 ###Design and Test a Model Architecture
 
