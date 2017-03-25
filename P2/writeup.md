@@ -16,8 +16,8 @@ The goals / steps of this project are the following:
 [//]: # (Image References)
 
 [image1]: ./diagram.png "histogram"
-[image2]: ./examples/grayscale.jpg "Grayscaling"
-[image3]: ./examples/random_noise.jpg "Random Noise"
+[image2]: ./colorImg.png "Color Image"
+[image3]: ./grayImg.png "Grayed out image"
 [image4]: ./examples/placeholder.png "Traffic Sign 1"
 [image5]: ./examples/placeholder.png "Traffic Sign 2"
 [image6]: ./examples/placeholder.png "Traffic Sign 3"
@@ -62,11 +62,12 @@ Here is an exploratory visualization of the data set. It is a bar chart showing 
 
 The code for this step is contained in the fourth code cell of the IPython notebook.
 
-As a first step, I decided to convert the images to grayscale because ...
+As a first step, I decided to convert the images to grayscale so that the training model can detect the same sign with different color.
 
 Here is an example of a traffic sign image before and after grayscaling.
 
 ![alt text][image2]
+![alt text][image3]
 
 As a last step, I normalized the image data because ...
 
