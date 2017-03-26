@@ -69,7 +69,7 @@ Here is an example of a traffic sign image before and after grayscaling.
 ![alt text][image2]
 ![alt text][image3]
 
-As a last step, I normalized the image data because ...
+As a last step, I normalized the image data because with bright environment, the gray level of the traffic sign color tends to be bigger, and in dark environment, the gray level of traffic sign tends to be smaller.
 
 ####2. Describe how, and identify where in your code, you set up training, validation and testing data. How much data was in each set? Explain what techniques were used to split the data into these sets. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, identify where in your code, and provide example images of the additional data)
 
