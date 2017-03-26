@@ -71,39 +71,33 @@ Here is an example of a traffic sign image before and after grayscaling.
 
 As a last step, I normalized the image data because with bright environment, the gray level of the traffic sign color tends to be bigger, and in dark environment, the gray level of traffic sign tends to be smaller.
 
-####2. Describe how, and identify where in your code, you set up training, validation and testing data. How much data was in each set? Explain what techniques were used to split the data into these sets. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, identify where in your code, and provide example images of the additional data)
+####2. Process summary
 
-The code for splitting the data into training and validation sets is contained in the fifth code cell of the IPython notebook.  
+Since data zip file provided training, validation, and testing data, I created three array to hold image data from those three sets. There are 34799 data in training set, 12630 in testing set, and 4410 data in the validation set. I am using default files for three sets, but if I have only one set of data, I could create three sets of data via randomly picking the data.
 
-To cross validate my model, I randomly split the training data into a training set and validation set. I did this by ...
 
-My final training set had X number of images. My validation set and test set had Y and Z number of images.
-
-The sixth code cell of the IPython notebook contains the code for augmenting the data set. I decided to generate additional data because ... To add more data to the the data set, I used the following techniques because ... 
-
-Here is an example of an original image and an augmented image:
-
-![alt text][image3]
-
-The difference between the original data set and the augmented data set is the following ... 
-
+My final training set had 34799 number of images for training. My validation set and test set had 12630 and 4410 number of images.
 
 ####3. Describe, and identify where in your code, what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
 
-The code for my final model is located in the seventh cell of the ipython notebook. 
+The code for my final model is located in the fifth cell of the ipython notebook. 
+
 
 My final model consisted of the following layers:
 
 | Layer         		|     Description	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| Input         		| 32x32x3 RGB image   							| 
-| Convolution 3x3     	| 1x1 stride, same padding, outputs 32x32x64 	|
-| RELU					|												|
-| Max pooling	      	| 2x2 stride,  outputs 16x16x64 				|
-| Convolution 3x3	    | etc.      									|
-| Fully connected		| etc.        									|
-| Softmax				| etc.        									|
-|						|												|
+| Input         		| 32x32x1 RGB image   							| 
+| Convolution 5x5     	| 1x1 stride, valid padding, outputs 28x28x6	|
+| Sigmoid
+| Max Pooling | 2x2
+| Convolution 5x5     	| 1x1 stride, valid padding, outputs 14x14x16 	|
+| Sigmoid
+| Max Pooling | 2x2
+| Flatten
+| Fully connected		| Input 400, output 120
+| Relu
+| Fully connected		| Input 120, output 86
 |						|												|
  
 
