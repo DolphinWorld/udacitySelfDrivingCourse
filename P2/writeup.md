@@ -160,6 +160,15 @@ Here are five German traffic signs that I found on the web:
 
 ####2.  The code for making predictions on my final model is located in last code cells (12, 13, 14, 15) of the Ipython notebook.
 
+The images found in the internet are slightly different from the training set, so it maybe difficult for our training model to recognize them correctly. The following are the differences:
+1. The training set were taken from street, the contrast of the image is blurry. While the web traffic signs are real sign picture. 
+
+2. Since the training set were taken from street, the angles are various. While the web traffic sign are always from front. 
+
+3. The training set has a lot of noises. some of the photos are very dark because of the light condition. While the web traffic sign are very clear. 
+
+4. Training set some times contains background objects, which is not in the web traffic signs.
+
 Here are the results of the prediction:
 
 | Image			        |     Prediction	        					| 
