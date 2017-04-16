@@ -128,7 +128,7 @@ To augment the data sat, I also use pictures from left camera, center camera, an
 ![alt text][image3]
 ![alt text][image4]
 
-After the collection process, I had 11716 number of data points. I then preprocessed this data by using left and right camera along with sheer left and right.
+After the collection process, I had 11716 number of data points. I then preprocessed this data by horizontal flip the data to get more data points, and balance the right/left turns.
 
 I finally randomly shuffled the data set and put 30% of the data into a validation set. 
 
