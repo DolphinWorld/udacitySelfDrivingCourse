@@ -14,9 +14,6 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-center.png            flip2.png            recover_from_left.png
-flip1.png            recover_from_drive_to_right.png    recover_from_right.png
-
 [image1]: ./images/center.png "Driving in the center"
 [image2]: ./images/right_2017_04_12_21_26_44_192.jpg "right camera"
 [image3]: ./images/center_2017_04_12_21_26_44_192.jpg "center camera"
@@ -54,17 +51,17 @@ The model.py file contains the code for training and saving the convolution neur
 
 My model consists of a convolution neural network with 5x5 and 3x3 filter sizes and depths between 24 and 64 (model.py lines 50-54) 
 
-The model includes RELU layers to introduce nonlinearity (code line 50-54), and the data is normalized in the model using a Keras lambda layer (code line 48). 
+The model includes RELU layers to introduce nonlinearity (code line 57-61), and the data is normalized in the model using a Keras lambda layer (code line 54). 
 
 ####2. Attempts to reduce overfitting in the model
 
-The model contains dropout layers in order to reduce overfitting (model.py lines 59). 
+The model contains dropout layers in order to reduce overfitting (model.py lines 66). 
 
-The model was trained and validated on different data sets to ensure that the model was not overfitting (code line 63). The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
+The model was trained and validated on different data sets to ensure that the model was not overfitting (code line 94). The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
 
 ####3. Model parameter tuning
 
-The model used an adam optimizer, so the learning rate was not tuned manually (model.py line 62).
+The model used an adam optimizer, so the learning rate was not tuned manually (model.py line 69).
 
 ####4. Appropriate training data
 
@@ -132,4 +129,4 @@ After the collection process, I had 11716 number of data points. I then preproce
 
 I finally randomly shuffled the data set and put 30% of the data into a validation set. 
 
-I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 10 as evidenced by validation loss start flatten out. I used an adam optimizer so that manually training the learning rate wasn't necessary.
+I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 6 indicated by ModelCheckpoint and LossCallback. I used an adam optimizer so that manually training the learning rate wasn't necessary.
