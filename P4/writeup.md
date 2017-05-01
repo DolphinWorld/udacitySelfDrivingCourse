@@ -21,7 +21,8 @@ The goals / steps of this project are the following:
 [UndistortedChessBoard]: ./output_images/undistortedChessBoard.png "Chess Board Undistorted"
 [gradient]: ./output_images/gradient.png "Gradiented Image"
 [wrapped]: ./output_images/perspective.png "Wrapped Transform"
-[image3]: ./examples/binary_combo_example.jpg "Binary Example"
+[findLines]: ./output_images/findLines.png "Find Lines"
+[paveLane]: ./output_images/paveLane.png "Pave Lane"
 [image4]: ./examples/warped_straight_lines.jpg "Warp Example"
 [image5]: ./examples/color_fit_lines.jpg "Fit Visual"
 [image6]: ./examples/example_output.jpg "Output"
@@ -99,9 +100,9 @@ I verified that my perspective transform was working as expected by drawing the 
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
-Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
+In the 9th code section, I have a method called `find_lines` using polynomial to find lines like this:
 
-![alt text][image5]
+![FindLines][findLines]
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
@@ -111,8 +112,8 @@ I did this in lines # through # in my code in `my_other_file.py`
 
 I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
 
-![alt text][image6]
 
+![Pave Lane][paveLane]
 ---
 
 ### Pipeline (video)
