@@ -19,6 +19,7 @@ The goals / steps of this project are the following:
 
 [Undistorted]: ./output_images/undistort1.png "Undistorted"
 [UndistortedChessBoard]: ./output_images/undistortedChessBoard.png "Chess Board Undistorted"
+[gradient]: ./output_images/gradient.png "Gradiented Image"
 [RoadTransformed]: ./output_images/undistortedChessBoard.png "Road Transformed"
 [image3]: ./examples/binary_combo_example.jpg "Binary Example"
 [image4]: ./examples/warped_straight_lines.jpg "Warp Example"
@@ -54,14 +55,16 @@ I then used the output `objpoints` and `imgpoints` to compute the camera calibra
 
 #### 1. Provide an example of a distortion-corrected image.
 
+In the 4th and 5th code black, which is around "Undistort test images", I used the objpoints and imgpoints which were created in the above step, and call cv2.calibrateCamera, I got return values of cameraMatrix and distCoeffs which then be passed to cv2.undistort method to perform the undistortion
+
 To demonstrate this step, I will describe how I apply the distortion correction to one of the test images like this one:
 ![Undistorted Image][Undistorted]
 
-#### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
+#### 2.  Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
 
-I used a combination of color and gradient thresholds to generate a binary image (thresholding steps at lines # through # in `another_file.py`).  Here's an example of my output for this step.  (note: this is not actually from one of the test images)
+I used a combination of S channel in HLS color space and L channel in LUV color space to generate a binary image. In the 8th code section, method handleGradient. Here's an example of my output for this step. 
 
-![alt text][image3]
+![Gradient Image][gradient]
 
 #### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
 
