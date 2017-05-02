@@ -22,8 +22,8 @@ The goals / steps of this project are the following:
 [gradient]: ./output_images/gradient.png "Gradiented Image"
 [wrapped]: ./output_images/perspective.png "Wrapped Transform"
 [findLines]: ./output_images/findLines.png "Find Lines"
-[paveLane]: ./output_images/paveLane.png "Pave Lane"
-[image4]: ./examples/warped_straight_lines.jpg "Warp Example"
+[paveLane]: ./output_images/pave.png "Pave Lane"
+[curv]: ./output_images/curv.png "Curv"
 [image5]: ./examples/color_fit_lines.jpg "Fit Visual"
 [image6]: ./examples/example_output.jpg "Output"
 [video1]: ./project_video.mp4 "Video"
@@ -106,11 +106,32 @@ In the 9th code section, I have a method called `find_lines` using polynomial to
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
-I did this in lines # through # in my code in `my_other_file.py`
+I use the following code to calculate the curvature. It is in calcCurvature method in AdLan.ipynb. 
+
+```python
+
+    arr_fit = np.polyfit(arry, arrx, 2)
+    arr_fitx = arr_fit[0] * arry ** 2 + arr_fit[1] * arry + arr_fit[2]
+    arrx_int = arr_fit[0] * h ** 2 + arr_fit[1] * h  + arr_fit[2]
+    arrx = np.append(arrx, arrx_int)
+    arry = np.append(arry, h)
+    arrx = np.append(arrx, arr_fit[2])
+    arry = np.append(arry, 0)
+    lsort = np.argsort(arry)
+    arry = arry[lsort]
+    arrx = arrx[lsort]
+    arr_fit = np.polyfit(arry, arrx, 2)
+    arr_fitx = arr_fit[0] * arry ** 2 + arr_fit[1] * arry + arr_fit[2]
+    arr_fit_cr = np.polyfit(arry * ym_per_pix, arrx * xm_per_pix , 2)
+    
+    arr_curverad = ((1 + (2*arr_fit_cr[0]*np.max(arry) + arr_fit_cr[1])**2)**1.5) \
+                                 /np.absolute(2*arr_fit_cr[0])
+```
+![Curv][curv]
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
-I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
+I implemented this step in AdLan.jpynb in the function `display_lane()`.  Here is an example of my result on a test image:
 
 
 ![Pave Lane][paveLane]
@@ -120,7 +141,7 @@ I implemented this step in lines # through # in my code in `yet_another_file.py`
 
 #### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
 
-Here's a [link to my video result](./project_video.mp4)
+Here's a [link to my video result](./output_images/project_output.mp4)
 
 ---
 
@@ -128,4 +149,10 @@ Here's a [link to my video result](./project_video.mp4)
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
+This algorithm does not work well when there is suddent change in the light condition, such as drive in and out shadow. 
+
+Also, if the traffic line is not clear, there will also be some problem.
+
 Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+1. Normalize the light effect, use relative color compare with the neighbor, so that light and dark area will be treated equally.
+2. Try always keep traffic light on, and always use the low threshold based on traffic light. 
