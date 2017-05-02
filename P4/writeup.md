@@ -100,13 +100,13 @@ I verified that my perspective transform was working as expected by drawing the 
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
-In the 9th code section, I have a method called `find_lines` using polynomial to find lines like this:
+In the 10th code section, I have a method called `find_lines` using polynomial to find lines like this:
 
 ![FindLines][findLines]
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
-I use the following code to calculate the curvature. It is in calcCurvature method in AdLan.ipynb. 
+I use the following code to calculate the curvature. It is in `calcCurvature` function in AdLan.ipynb 11st code section. 
 
 ```python
 
@@ -131,7 +131,7 @@ I use the following code to calculate the curvature. It is in calcCurvature meth
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
 
-I implemented this step in AdLan.jpynb in the function `display_lane()`.  Here is an example of my result on a test image:
+I implemented this step in AdLan.jpynb in the function `display_lane()` in code section 12th.  Here is an example of my result on a test image:
 
 
 ![Pave Lane][paveLane]
