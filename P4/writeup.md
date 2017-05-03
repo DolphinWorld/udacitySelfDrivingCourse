@@ -63,7 +63,21 @@ To demonstrate this step, I will describe how I apply the distortion correction 
 
 #### 2.  Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  Provide an example of a binary image result.
 
-I used a combination of S channel in HLS color space and L channel in LUV color space to generate a binary image. In the 8th code section, method handleGradient. Here's an example of my output for this step. 
+I use `cv2.inRange(HSV, (0, 60, 150), (60, 255, 255))` to detect yellow, the following code to detect white.
+
+```python
+ # For white
+    sensitivity_1 = 68
+    white = cv2.inRange(HSV, (0,0,255-sensitivity_1), (255,20,255))
+
+    sensitivity_2 = 40
+    HSL = cv2.cvtColor(img, cv2.COLOR_RGB2HLS)
+    white_2 = cv2.inRange(HSL, (0,255-sensitivity_2,0), (255,255,sensitivity_2))
+    white_3 = cv2.inRange(img, (200,200,200), (255,255,255))
+
+```
+
+Then combine them together along with S challen in HLS, L channel in LUV. The following is the picture example:
 
 ![Gradient Image][gradient]
 
@@ -109,7 +123,8 @@ In the 10th code section, I have a method called `find_lines` using polynomial t
 I use the following code to calculate the curvature. It is in `calcCurvature` function in AdLan.ipynb 11st code section. 
 
 ```python
-
+    y_eval = (200 // 2) * ym_per_pix # max plot / 2 then convert to meters
+    arr_curverad = ((1 + (2*arr_fit[0]*y_eval + arr_fit[1])**2)**1.5) / np.absolute(2*arr_fit[0])
 ```
 ![Curv][curv]
 
