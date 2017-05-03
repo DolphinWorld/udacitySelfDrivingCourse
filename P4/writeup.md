@@ -110,22 +110,6 @@ I use the following code to calculate the curvature. It is in `calcCurvature` fu
 
 ```python
 
-    arr_fit = np.polyfit(arry, arrx, 2)
-    arr_fitx = arr_fit[0] * arry ** 2 + arr_fit[1] * arry + arr_fit[2]
-    arrx_int = arr_fit[0] * h ** 2 + arr_fit[1] * h  + arr_fit[2]
-    arrx = np.append(arrx, arrx_int)
-    arry = np.append(arry, h)
-    arrx = np.append(arrx, arr_fit[2])
-    arry = np.append(arry, 0)
-    lsort = np.argsort(arry)
-    arry = arry[lsort]
-    arrx = arrx[lsort]
-    arr_fit = np.polyfit(arry, arrx, 2)
-    arr_fitx = arr_fit[0] * arry ** 2 + arr_fit[1] * arry + arr_fit[2]
-    arr_fit_cr = np.polyfit(arry * ym_per_pix, arrx * xm_per_pix , 2)
-    
-    arr_curverad = ((1 + (2*arr_fit_cr[0]*np.max(arry) + arr_fit_cr[1])**2)**1.5) \
-                                 /np.absolute(2*arr_fit_cr[0])
 ```
 ![Curv][curv]
 
