@@ -123,8 +123,15 @@ In the 10th code section, I have a method called `find_lines` using polynomial t
 I use the following code to calculate the curvature. It is in `calcCurvature` function in AdLan.ipynb 11st code section. 
 
 ```python
-    y_eval = (200 // 2) * ym_per_pix # max plot / 2 then convert to meters
-    arr_curverad = ((1 + (2*arr_fit[0]*y_eval + arr_fit[1])**2)**1.5) / np.absolute(2*arr_fit[0])
+    arr_fit = np.polyfit(arry, arrx, 2)
+    arr_fitx = arr_fit[0] * arry ** 2 + arr_fit[1] * arry + arr_fit[2]
+    
+    y_eval = max(arry) / 2  * ym_per_pix # max plot / 2 then convert to meters
+    
+    
+    arr_fit_cr = np.polyfit(arry*ym_per_pix, arrx*xm_per_pix, 2)
+    arr_curverad = ((1 + (2*arr_fit_cr[0]*y_eval*ym_per_pix + arr_fit_cr[1])**2)**1.5) / np.absolute(2*arr_fit_cr[0])
+
 ```
 ![Curv][curv]
 
