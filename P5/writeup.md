@@ -16,7 +16,24 @@ The goals / steps of this project are the following:
 [image2]: ./output_images/car_hog.png
 [image3]: ./output_images/non_car_hog.png
 [image4]: ./output_images/detected.png
-[image5]: ./examples/bboxes_and_heat.png
+[image5]: ./output_images/img1.png
+[image6]: ./output_images/img2.png
+[image7]: ./output_images/img3.png
+[image8]: ./output_images/img4.png
+[image9]: ./output_images/img5.png
+[image10]: ./output_images/img6.png
+[image11]: ./output_images/box1.png
+[image12]: ./output_images/box2.png
+[image13]: ./output_images/box3.png
+[image14]: ./output_images/box4.png
+[image15]: ./output_images/box5.png
+[image16]: ./output_images/box6.png
+[image17]: ./output_images/heat1.png
+[image18]: ./output_images/heat2.png
+[image19]: ./output_images/heat3.png
+[image20]: ./output_images/heat4.png
+[image21]: ./output_images/heat5.png
+[image22]: ./output_images/heat6.png
 [image6]: ./examples/labels_map.png
 [image7]: ./examples/output_bboxes.png
 [video1]: ./project_video.mp4
@@ -86,15 +103,26 @@ I recorded the positions of positive detections in each frame of the video.  Fro
 
 Here's an example result showing the heatmap from a series of frames of video, the result of `scipy.ndimage.measurements.label()` and the bounding boxes then overlaid on the last frame of video:
 
+
 ### Here are six frames and their corresponding heatmaps:
 
-![alt text][image5]
+![image1][image5] ![image1][image11] 
+![image2][image6] ![image2][image12]
+![image3][image7] ![image3][image13] 
+![image4][image8] ![image4][image14]
+![image5][image9] ![image5][image15] 
+![image6][image10] ![image6][image16]
 
 ### Here is the output of `scipy.ndimage.measurements.label()` on the integrated heatmap from all six frames:
-![alt text][image6]
+![image1][image17] 
+![image2][image18]
+![image3][image19] 
+![image4][image20]
+![image5][image21] 
+![image6][image22]
 
 ### Here the resulting bounding boxes are drawn onto the last frame in the series:
-![alt text][image7]
+![image6][image16]
 
 
 
@@ -106,3 +134,7 @@ Here's an example result showing the heatmap from a series of frames of video, t
 
 Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
 
+
+I trained all the data, although the testing result is about 99.5% correct, it does not work well in the real video. I think that could because the training image on vehicles are whole vehicle, while search on the real image usually has offset, even I set the overlap to 0.8. 
+
+I need to process the training/testing vehicle images, create it with offset, either x, or y. 
