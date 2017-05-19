@@ -19,7 +19,7 @@ The goals / steps of this project are the following:
 [image1]: ./output_images/non_car.png
 [image2]: ./output_images/car_hog.png
 [image3]: ./output_images/non_car_hog.png
-[image4]: ./examples/sliding_window.jpg
+[image4]: ./output_images/detected.png
 [image5]: ./examples/bboxes_and_heat.png
 [image6]: ./examples/labels_map.png
 [image7]: ./examples/output_bboxes.png
@@ -41,14 +41,14 @@ You're reading it!
 
 The code for this step is contained in the second code cell of the IPython notebook, in function get_hog_features. 
 
-I started by reading in all the `vehicle` and `non-vehicle` images.  Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
+In the 4th code section, I started by reading in all the `vehicle` and `non-vehicle` images.  Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
 
 ![vehicle][image0]
 ![non-vehicle][image1]
 
-I then explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`).  I grabbed random images from each of the two classes and displayed them to get a feel for what the `skimage.hog()` output looks like.
+I then explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, `hog_channel` and `cells_per_block`).  I grabbed random images from each of the two classes and displayed them to get a feel for what the `skimage.hog()` output looks like.
 
-Here is an example using the `YCrCb` color space and HOG parameters of `orientations=8`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
+Here is an example using the `YCrCb` color space and HOG parameters of `orientations=8`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`, `hog channel 'ALL'`.:
 
 
 Vehicle
@@ -59,31 +59,29 @@ Non-Vehicle
 
 ####2. Explain how you settled on your final choice of HOG parameters.
 
-I tried various combinations of parameters and...
+I tried various combinations of parameters and tested in the classifier, I found that orient == 8, pix_per_cell == 8, cell_per_block give me the best test result, 99.3%
 
 ####3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
-I trained a linear SVM using...
+In 5th code section, I trained a linear SVM using C=10, kernel='rbf'. I found these parameters using clf.best_params_ from the result of GridSearchCV. I use the following parameters `hog_channel=ALL`, `hist_bin=32`, `spatial_size=(16, 16)`, `color_space='HLS'`, `orient=8`, `pix_per_cell=8`, `cell_per_block=2`.
 
 ###Sliding Window Search
 
 ####1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
 
-I decided to search random window positions at random scales all over the image and came up with this (ok just kidding I didn't actually ;):
-
-![alt text][image3]
+In the 6th code section, I call slide_window defined in the 2nd code section. Using the following sizes, `(64, 128, 196, 256)`, using overlap 0.8. I found these parameters using several testing images.
 
 ####2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
-Ultimately I searched on two scales using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
+Ultimately I searched on four scales using YCrCb ALL-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
 
-![alt text][image4]
+![Detected][image4]
 ---
 
 ### Video Implementation
 
 ####1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
-Here's a [link to my video result](./project_video.mp4)
+Here's a [link to my video result](output_images/project_video.mp4)
 
 
 ####2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
