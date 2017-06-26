@@ -24,10 +24,6 @@ void KalmanFilter::Init(VectorXd &x_in, MatrixXd &P_in, MatrixXd &F_in,
 }
 
 void KalmanFilter::Predict() {
-  /**
-  TODO:
-    * predict the state
-  */
     x_ = F_ * x_;
     MatrixXd Ft = F_.transpose();
     P_ = F_ * P_ * Ft + Q_;
@@ -35,11 +31,6 @@ void KalmanFilter::Predict() {
 
 
 void KalmanFilter::calcKF(const VectorXd &z, const MatrixXd &z_pred) {
-  /**
-  TODO:
-    * update the state by using Kalman Filter equations
-  */
-    //VectorXd z_pred = H_ * x_;
     VectorXd y = z - z_pred;
     MatrixXd Ht = H_.transpose();
     MatrixXd S = H_ * P_ * Ht + R_;
@@ -59,12 +50,7 @@ void KalmanFilter::Update(const VectorXd &x) {
 }
 
 void KalmanFilter::UpdateEKF(const VectorXd &x) {
-  /**
-  TODO:
-    * update the state by using Extended Kalman Filter equations
-  */
-
-  VectorXd z = VectorXd(3);
+  VectorXd z = VectorXd(3); // for pho, theta, phodot
   z(0) = sqrt(x_(0) * x_(0) + x_(1) * x_(1));
   float z0 = z(0);
   if (z0 == 0) {
@@ -76,6 +62,6 @@ void KalmanFilter::UpdateEKF(const VectorXd &x) {
   }
   z(1) = atan(x_(1) / v);
   z(2) = (x_(0) * x_(2) + x_(1) * x_(3)) / z0;
-  calcKF(x, z);
+  calcKF(x,  z);
 }
 
