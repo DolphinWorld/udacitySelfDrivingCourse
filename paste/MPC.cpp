@@ -6,8 +6,8 @@
 using CppAD::AD;
 
 // TODO: Set the timestep length and duration
-const size_t N = 25;
-const double dt = 0.05;
+const size_t N = 10;
+const double dt = 0.1;
 const double Lf = 2.67;
 
 // This value assumes the model presented in the classroom is used.
@@ -20,7 +20,7 @@ const double Lf = 2.67;
 // presented in the classroom matched the previous radius.
 //
 // This is the length from front to CoG that has a similar radius.
-double ref_v = 40;
+double ref_v = 80;
 
 size_t x_start = 0;
 size_t y_start = x_start + N;
@@ -38,6 +38,7 @@ class FG_eval {
   FG_eval(Eigen::VectorXd coeffs) { this->coeffs = coeffs; }
 
   typedef CPPAD_TESTVECTOR(AD<double>) ADvector;
+
   void operator()(ADvector& fg, const ADvector& vars) {
     // TODO: implement MPC
     // `fg` a vector of the cost constraints, `vars` is a vector of variable values (state & actuators)
@@ -52,22 +53,29 @@ class FG_eval {
     // any anything you think may be beneficial.
 
     // The part of the cost based on the reference state.
+    double arr[7] = {5, 20, 0.15, 400, 15, 5, 5};
+
     for (int t = 0; t < N; t++) {
-      fg[0] += CppAD::pow(vars[cte_start + t], 2);
-      fg[0] += 10000 * CppAD::pow(vars[epsi_start + t], 2);
-      fg[0] += CppAD::pow(vars[v_start + t] - ref_v, 2);
+      AD<double> d0 = arr[0] * CppAD::pow(vars[cte_start + t], 2); // distance error
+      AD<double> d1 = arr[1] * CppAD::pow(vars[epsi_start + t], 2); // angle error
+
+      AD<double> d2 = arr[2] * CppAD::pow(vars[v_start + t] - ref_v, 2); // speed, if 
+  
+      fg[0] += d0 + d1 + d2;
     }
 
     // Minimize the use of actuators.
     for (int t = 0; t < N - 1; t++) {
-      //fg[0] += CppAD::pow(vars[delta_start + t], 2);
-      //fg[0] += CppAD::pow(vars[a_start + t], 2);
+      AD<double> d0 = arr[3] * CppAD::pow(vars[delta_start + t], 2); // angle change
+      AD<double> d1 = arr[4] * CppAD::pow(vars[a_start + t], 2);  // accelerate  
+      fg[0] += d0 + d1;
     }
 
     // Minimize the value gap between sequential actuations.
     for (int t = 0; t < N - 2; t++) {
-      //fg[0] += CppAD::pow(vars[delta_start + t + 1] - vars[delta_start + t], 2);
-      //fg[0] += CppAD::pow(vars[a_start + t + 1] - vars[a_start + t], 2);
+      AD<double> d0 =  arr[5] * CppAD::pow(vars[delta_start + t + 1] - vars[delta_start + t], 2); // angle change diff 
+      AD<double> d1 = arr[6] * CppAD::pow(vars[a_start + t + 1] - vars[a_start + t], 2); // accelerate diff
+      fg[0] += d0 + d1;
     } 
 
     fg[1 + x_start] = vars[x_start];
@@ -99,8 +107,11 @@ class FG_eval {
       AD<double> delta0 = vars[delta_start + t - 1];
       AD<double> a0 = vars[a_start + t - 1];
 
-      AD<double> f0 = coeffs[0] + coeffs[1] * x0;
-      AD<double> psides0 = CppAD::atan(coeffs[1]);
+      //AD<double> f0 = coeffs[0] + coeffs[1] * x0;
+      //AD<double> psides0 = CppAD::atan(coeffs[1]);
+
+      AD<double> f0 = coeffs[0] + coeffs[1] * x0 + coeffs[2] * CppAD::pow(x0, 2) + coeffs[3] * CppAD::pow(x0, 3);
+      AD<double> psides0 = CppAD::atan(coeffs[1] + 2 * coeffs[2] * x0 + 3 * coeffs[3] * CppAD::pow(x0, 2));
 
       fg[1 + x_start + t] = x1 - (x0 + v0 * CppAD::cos(psi0) * dt);
       fg[1 + y_start + t] = y1 - (y0 + v0 * CppAD::sin(psi0) * dt);
@@ -111,6 +122,7 @@ class FG_eval {
       fg[1 + epsi_start + t] =
           epsi1 - ((psi0 - psides0) + v0 * delta0 / Lf * dt);
     }
+    cout << " cost " << fg[0] << endl;
   }
 };
 
@@ -162,13 +174,13 @@ vector<double> MPC::Solve(Eigen::VectorXd state, Eigen::VectorXd coeffs) {
 
 
   for (int i = 0; i < delta_start; i++) {
-    vars_lowerbound[i] = -1.0e19;
-    vars_upperbound[i] = 1.0e19;
+    vars_lowerbound[i] =  -1.0e5;
+    vars_upperbound[i] =  1.0e5;
   }
 
   for (int i = delta_start; i < a_start; i++) {
-    vars_lowerbound[i] = -0.436332;
-    vars_upperbound[i] = 0.436332;
+    vars_lowerbound[i] = -0.4363;
+    vars_upperbound[i] = 0.4363;
   }
 
   for (int i = a_start; i < n_vars; i++) {
@@ -233,6 +245,8 @@ vector<double> MPC::Solve(Eigen::VectorXd state, Eigen::VectorXd coeffs) {
 
   // Cost
   auto cost = solution.obj_value;
+  std::cout << "Cost " << cost << std::endl;
+
 
   // TODO: Return the first actuator values. The variables can be accessed with
   // `solution.x[i]`.
@@ -242,8 +256,6 @@ vector<double> MPC::Solve(Eigen::VectorXd state, Eigen::VectorXd coeffs) {
   vector<double> result;
   result.push_back(solution.x[delta_start]);
   result.push_back(solution.x[a_start]);
-
-  std::cerr << "Cost<<< " << cost << " out <<< " << solution.x[a_start] << std::endl;
 
   for (int i = 0; i < N - 1; i++) {
     result.push_back(solution.x[x_start + i + 1]);
